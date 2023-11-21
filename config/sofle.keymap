@@ -12,6 +12,7 @@
 #define RAISE 1
 #define MIRROR 2
 #define ADJUST 3
+#define ASETNIOP 4
 
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
@@ -366,6 +367,24 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 &rgb_ug RGB_TOG                 &rgb_ug RGB_HUD &rgb_ug RGB_SAD &rgb_ug RGB_BRD &rgb_ug RGB_EFF &none                      &none &none &none &none &none &none
 &none                           &none           &none           &none           &none           &none        &trans &trans &none &none &none &none &none &none
                                                 &none           &none           &none           &none        &none  &none  &none &none &none &none
+            >;
+            sensor-bindings = <&inc_dec_kp HOME END &inc_dec_kp LEFT RIGHT>;
+        };
+
+    Asetniop_layer {
+/* ╭─────────────────────────────────╮          ╭─────────────────────────╮
+   │ BTCLR   BT1  BT2  BT3  BT4  BT5 │          │  _   _   _   _   _   _  │
+   │ ExtPwr  Hue+ Sat+ Bri+  _    _  │          │  _   _   _   _   _   _  │
+   │ TogRGB  Hue- Sat- Bri- Eff   _  ╰────╮ ╭───╯  _   _   _   _   _   _  │
+   │   _      _    _    _    _    _     _ | | _    _   _   _   _   _   _  │
+   ╰────────╮ _    _    _    _    _     _ │ │ _    _   _   _   _ ╭────────╯
+            ╰─────────────────────────────╯ ╰────────────────────╯        */
+        bindings = <
+&none &none &none &none &none &none               &none &none &none &none &none &none
+&none &none &none &none &none &none               &none &none &none &none &none &none
+&none &none &none &none &none &none               &none &none &none &none &none &none
+&none &none &none &none &none &none &trans &trans &none &none &none &none &none &none
+      &none &none &none &none &none &none  &none  &none &none &none
             >;
             sensor-bindings = <&inc_dec_kp HOME END &inc_dec_kp LEFT RIGHT>;
         };

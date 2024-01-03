@@ -29,7 +29,7 @@
     #binding-cells = <0>; \
     wait-ms = <20>; \
     tap-ms = <10>; \
-    bindings = <BINDINGS> \
+    bindings = <BINDINGS>; \
   };
 
 ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)

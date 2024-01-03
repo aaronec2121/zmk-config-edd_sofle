@@ -22,6 +22,15 @@
     layers = <0 1 2>; \
   };
 
+#define MACRO(NAME, BINDINGS) \
+  macro_##NAME { \
+    label = NAME; \
+    #binding-cells = <0>; \
+    wait-ms = <20>; \
+    tap-ms = <10>; \
+    bindings = <BINDINGS> \
+  };
+
 ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 
 &mt {
@@ -211,6 +220,8 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
                 , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4>
                 ;
         };
+        compatible = "zmk,behavior-macro";
+        MACRO(testmacro, &macro_tap &kp N &kp T)
 };
         
   

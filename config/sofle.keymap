@@ -301,7 +301,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 };
         
   
-        combos {
+  combos {
 /*                        KEY POSITIONS
   ╭────────────────────────╮         ╭────────────────────────╮
   │  0   1   2   3   4   5 │         │  6   7   8   9  10  11 │
@@ -310,7 +310,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
   │ 36  37  38  39  40  41  42 | | 43  44  45  46  47  48  49 │  note: encoder pushbuttons on 42 and 43
   ╰───────╮ 50  51  52  53  54 │ │ 55  56  57  58  59 ╭───────╯
           ╰────────────────────╯ ╰────────────────────╯        
-                      COMBOS with RAISE (53)
+                      COMBOS with RAISE (Key 53)
   ╭───────────────────────────╮          ╭────────────────────────╮
   │ _  .025 .125 .25  .375 .5 │          │  _   _   _   _   _   _ │
   │ _   _    _    _    _    _ │          │  _   _   _   _   _   _ │
@@ -341,6 +341,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_pw, &mcr_pw, 9 10 11)
             COMBO(cmb_minus, &kp MINUS, 28 29)
         };
+};
 
 / {
     // Activate ADJUST layer by pressing numarrow and code

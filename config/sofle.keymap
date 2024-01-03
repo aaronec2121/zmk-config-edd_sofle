@@ -13,6 +13,9 @@
 #define MIRROR 2
 #define ADJUST 3
 
+#define STRINGIFY(x) #x
+#define EXPAND_AND_STRINGIFY(x) STRINGIFY(x)
+
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
@@ -24,7 +27,7 @@
 
 #define MACRO(NAME, BINDINGS) \
   mcr_##NAME { \
-    label = """mcr_##NAME"""; \
+    label = EXPAND_AND_STRINGIFY(mcr_##NAME); \
     compatible = "zmk,behavior-macro"; \
     #binding-cells = <0>; \
     wait-ms = <20>; \

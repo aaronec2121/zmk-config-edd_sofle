@@ -149,7 +149,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             tap-ms = <10>;
             bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp I>, <&macro_release &kp LSHFT> , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4>;
         };*/
-        MACRO(pw, &macro_press &kp LSHFT>, <&macro_tap &kp I>, <&macro_release &kp LSHFT> , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4)
+        MACRO(pw, &macro_press &kp LSHFT>CHAR(44) <&macro_tap &kp I>, <&macro_release &kp LSHFT> , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4)
         MACRO(tst, &macro_tap &kp BSPC)
 };
         

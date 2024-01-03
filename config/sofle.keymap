@@ -24,7 +24,7 @@
 
 #define MACRO(NAME, BINDINGS) \
   mcr_##NAME { \
-    label = #NAME; \
+    label = mcr_##NAME; \
     compatible = "zmk,behavior-macro"; \
     #binding-cells = <0>; \
     wait-ms = <20>; \
@@ -79,11 +79,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             #binding-cells = <0>;
             wait-ms = <20>;
             tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp A>
-                , <&macro_release &kp LCTRL>
-                , <&macro_tap &kp KP_N0 &kp DOT &kp KP_N5>
-                , <&macro_tap &kp RET>;
+            bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp A>, <&macro_release &kp LCTRL>, <&macro_tap &kp KP_N0 &kp DOT &kp KP_N5>, <&macro_tap &kp RET>;
         };
         mcr_deg: mcr_deg {
             label = "mcr_deg";
@@ -92,21 +88,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             wait-ms = <20>;
             tap-ms = <10>;
             bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8>, <&macro_release &kp LALT>;
-        };
-        mcr_mueps: mcr_mueps {
-            label = "mcr_mueps";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LALT>
-                , <&macro_tap &kp KP_N2 &kp KP_N3 &kp KP_N0>
-                , <&macro_release &kp LALT>
-                , <&macro_press &kp LALT>
-                , <&macro_tap &kp KP_N2 &kp KP_N3 &kp KP_N8>
-                , <&macro_release &kp LALT>
-                ;
         };
         mcr_mu: mcr_mu {
             label = "mcr_mu";
@@ -201,7 +182,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_sig, &mcr_sig, 39 53)
             COMBO(cmb_mu, &mcr_mu, 40 53)
             COMBO(cmb_eps, &mcr_eps, 41 53)
-            COMBO(cmb_mueps, &mcr_mueps, 40 41 53)
             COMBO(cmb_plsmns, &mcr_plsmns, 28 29 53)
             COMBO(cmb_pscrn, &kp PSCRN, 50 53)
             COMBO(cmb_025, &mcr_025, 1 53)

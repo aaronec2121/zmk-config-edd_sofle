@@ -24,7 +24,7 @@
 
 #define MACRO(NAME, BINDINGS) \
   mcr_##NAME { \
-    label = #(mcr_##NAME); \
+    label = #mcr_##NAME; \
     compatible = "zmk,behavior-macro"; \
     #binding-cells = <0>; \
     wait-ms = <20>; \

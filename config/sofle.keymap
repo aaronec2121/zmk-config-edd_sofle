@@ -26,7 +26,7 @@
   };
 
 #define MACRO(NAME, BINDINGS) \
-  mcr_##NAME { \
+  mcr_##NAME: mcr_##NAME { \
     label = EXPAND_AND_STRINGIFY(mcr_##NAME); \
     compatible = "zmk,behavior-macro"; \
     #binding-cells = <0>; \

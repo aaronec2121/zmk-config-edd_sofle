@@ -20,7 +20,7 @@
     timeout-ms = <50>; \
     bindings = <BINDINGS>; \
     key-positions = <KEYPOS>; \
-    layers = <0 1 2>; \
+    layers = <0 1 2 3 4>; \
   };
 
 ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
@@ -341,7 +341,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_pw, &mcr_pw, 9 10 11)
             COMBO(cmb_minus, &kp MINUS, 28 29)
         };
-};
 
 / {
     // Activate ADJUST layer by pressing numarrow and code

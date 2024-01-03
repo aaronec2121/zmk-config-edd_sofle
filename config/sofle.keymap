@@ -3,28 +3,22 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/ext_power.h>
-
 #include "../zmk-nodefree-config/helper.h"
 #include "../zmk-nodefree-config/keypos_def/keypos_36keys.h"
 #include "../zmk-nodefree-config/international_chars/german.dtsi"
-
 #define BASE 0
 #define RAISE 1
 #define MIRROR 2
 #define ADJUST 3
-#define NAV 4
-
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
     timeout-ms = <50>; \
     bindings = <BINDINGS>; \
     key-positions = <KEYPOS>; \
-    layers = <0 1 2 3 4>; \
+    layers = <0 1 2>; \
   };
-
 ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
-
 &mt {
     tapping-term-ms = <200>;
     retro-tap;
@@ -199,92 +193,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
                 = <&macro_tap &kp F2 &kp LPAR &kp RPAR &kp LEFT>
                 ;
         };
-        prv_word: prv_word {
-            label = "prv_word";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp LEFT>
-                , <&macro_release &kp LCTRL>
-                ;
-        };
-        nxt_word: nxt_word {
-            label = "nxt_word";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp RIGHT>
-                , <&macro_release &kp LCTRL>
-                ;
-        };
-        slct_prv: slct_prv {
-            label = "slct_prv";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL LSHFT>
-                , <&macro_tap &kp LEFT>
-                , <&macro_release &kp LCTRL LSHFT>
-                ;
-        };
-        slct_word: slct_word {
-            label = "slct_word";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp RIGHT>
-                , <&macro_press &kp LSHFT>
-                , <&macro_tap &kp LEFT>
-                , <&macro_release &kp LCTRL LSHFT>
-                ;
-        };
-        slct_nxt: slct_nxt {
-            label = "slct_nxt";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL LSHFT>
-                , <&macro_tap &kp RIGHT>
-                , <&macro_release &kp LCTRL LSHFT>
-                ;
-        };
-        mcr_undo: mcr_undo {
-            label = "mcr_undo";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp Z>
-                , <&macro_release &kp LCTRL>
-                ;
-        };
-        mcr_redo: mcr_redo {
-            label = "mcr_redo";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp Y>
-                , <&macro_release &kp LCTRL>
-                ;
-        };
         mcr_pw: mcr_pw {
             label = "mcr_pw";
             compatible = "zmk,behavior-macro";
@@ -301,7 +209,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 };
         
   
-  combos {
+        combos {
 /*                        KEY POSITIONS
   ╭────────────────────────╮         ╭────────────────────────╮
   │  0   1   2   3   4   5 │         │  6   7   8   9  10  11 │
@@ -310,27 +218,31 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
   │ 36  37  38  39  40  41  42 | | 43  44  45  46  47  48  49 │  note: encoder pushbuttons on 42 and 43
   ╰───────╮ 50  51  52  53  54 │ │ 55  56  57  58  59 ╭───────╯
           ╰────────────────────╯ ╰────────────────────╯        
-                      COMBOS with RAISE (Key 53)
+                      COMBOS with RAISE (53)
   ╭───────────────────────────╮          ╭────────────────────────╮
   │ _  .025 .125 .25  .375 .5 │          │  _   _   _   _   _   _ │
-  │ _   _    _    _    _    _ │          │  _   _   _   _   _   _ │
-  │ _   _    _    _    _ (±)_ ╰────╮ ╭───╯  _   _   _   _   _   _ │
-  │ _   π    °    σ   UNDO REDO  _ | | _    _   _   _   _   _   _ │
-  ╰───────╮ PSCRN _    _   RAISE _ │ │ _    _   _   _   _ ╭───────╯
+  │ _   _    _    ^    _    _ │          │  _   _   _   _   _   _ │
+  │ _   _    <-   v    ->{±}_ ╰────╮ ╭───╯  _   _   _   _   _   _ │
+  │ _   π    °    σ    µ{µε}ε    _ | | _    _   _   _   _   _   _ │
+  ╰───────╮ PSCRN _    _  RAISE  _ │ │ _    _   _   _   _ ╭───────╯
           ╰────────────────────────╯ ╰────────────────────╯        */
             compatible = "zmk,combos";
             
-            COMBO(cmb_bspc1, &kp BSPC, 13 14)
-            COMBO(cmb_del1, &kp DEL, 14 15)
-            COMBO(cmb_bspc2, &kp BSPC, 26 27)
-            COMBO(cmb_del2, &kp DEL, 28 29)
-            COMBO(cmb_up, &kp UP, 57 58)
+            COMBO(cmb_bspc, &kp BSPC, 13 14)
+            COMBO(cmb_del, &kp DEL, 14 15)
+            COMBO(cmb_enter, &kp RET, 48 49)
+            COMBO(cmb_up1, &kp UP, 57 58)
+            COMBO(cmb_up, &kp UP, 15 53)
+            COMBO(cmb_down, &kp DOWN, 27 53)
+            COMBO(cmb_left, &kp LEFT, 26 53)
+            COMBO(cmb_right, &kp RIGHT, 28 53)
             COMBO(cmb_delta, &ucd_delta, 36 53)
             COMBO(cmb_pi, &mcr_pi, 37 53)
             COMBO(cmb_deg, &mcr_deg, 38 53)
             COMBO(cmb_sig, &mcr_sig, 39 53)
-            COMBO(cmb_undo, &mcr_undo, 40 53)
-            COMBO(cmb_redo, &mcr_redo, 41 53)
+            COMBO(cmb_mu, &mcr_mu, 40 53)
+            COMBO(cmb_eps, &mcr_eps, 41 53)
+            COMBO(cmb_mueps, &mcr_mueps, 40 41 53)
             COMBO(cmb_plsmns, &mcr_plsmns, 28 29 53)
             COMBO(cmb_pscrn, &kp PSCRN, 50 53)
             COMBO(cmb_025, &mcr_025, 1 53)
@@ -342,7 +254,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_minus, &kp MINUS, 28 29)
         };
 };
-
 / {
     // Activate ADJUST layer by pressing numarrow and code
     //conditional_layers {
@@ -376,54 +287,57 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             tapping-term-ms = <200>;
             bindings = <&kp RSHFT>, <&kp CAPS>;
         };
-        ht: hold_tap {
-            compatible = "zmk,behavior-hold-tap";
-            label = "ht";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&kp>, <&kp>;
-        };
     };
   
     keymap {
         compatible = "zmk,keymap";
         
         default_layer {
-/* ╭─────────────────────────────────╮                     ╭──────────────────────────────────╮
-   |   ESC    1    2    3    4    5  |                     |  6    7    8    9    0    BKSPC  |
-   |   TAB    Q    W    E    R    T  |                     |  Y    U    I    O    P      |    |
-   |SHFT/CAP  A    S    D    F    G  ╰───────────╮ ╭───────╯  H    J    K    L    ;:    ' "   |
-   |   CTRL   Z    X    C    V    B      C_PP    | |   C_PP   N    M    ,    .    /?  SHFT/CAP|
-   ╰────────────╮ WIN  ALT ENTER RAISE NAV/SPACE | | NAV/SPACE RAISE   <-   v   -> ╭──────────╯
-                ╰────────────────────────────────╯ ╰───────────────────────────────╯              */
+/* ╭─────────────────────────────────╮                 ╭──────────────────────────────────╮
+   |   ESC    1    2    3    4    5  |                 |  6    7    8    9    0    BKSPC  |
+   |   TAB    Q    W    E    R    T  |                 |  Y    U    I    O    P      |    |
+   |SHFT/CAP  A    S    D    F    G  ╰───────╮ ╭───────╯  H    J    K    L    ;:    ' "   |
+   |   CTRL   Z    X    C    V    B     C_PP | | C_PP     N    M    ,    .    /?  SHFT/CAP|
+   ╰────────────╮ WIN  ALT ENTER RAISE SPACE | | SPACE RAISE   <-   v   -> ╭──────────────╯
+                ╰────────────────────────────╯ ╰───────────────────────────╯              */
             bindings = <
-&kp ESC       &kp N1 &kp N2   &kp N3   &kp N4  &kp N5                            &kp N6    &kp N7   &kp N8    &kp N9   &kp N0   &kp BSPC
-&kp TAB       &kp Q  &kp W    &kp E    &kp R   &kp T                             &kp Y     &kp U    &kp I     &kp O    &kp P    &kp BSLH
-&td_Lshftcaps &kp A  &kp S    &kp D    &kp F   &kp G                             &kp H     &kp J    &kp K     &kp L    &kp SEMI &kp APOS
-&kp LCTRL     &kp Z  &kp X    &kp C    &kp V   &kp B     &kp C_PP    &kp C_PP    &kp N     &kp M    &kp COMMA &kp DOT  &kp FSLH &ht RSHFT RET
-                     &kp LGUI &kp LALT &kp RET &mo RAISE &lt 4 SPACE &lt 4 SPACE &mo RAISE &kp LEFT &kp DOWN &kp RIGHT
+&kp ESC       &kp N1 &kp N2   &kp N3   &kp N4  &kp N5                        &kp N6      &kp N7   &kp N8    &kp N9   &kp N0   &kp BSPC
+&kp TAB       &kp Q  &kp W    &kp E    &kp R   &kp T                         &kp Y       &kp U    &kp I     &kp O    &kp P    &kp PIPE
+&td_Lshftcaps &kp A  &kp S    &kp D    &kp F   &kp G                         &kp H       &kp J    &kp K     &kp L    &kp SEMI &kp APOS
+&kp LCTRL     &kp Z  &kp X    &kp C    &kp V   &kp B     &kp C_PP  &kp C_PP  &kp N       &kp M    &kp COMMA &kp DOT  &kp FSLH &td_Rshftcaps
+                     &kp LGUI &kp LALT &kp RET &mo RAISE &kp SPACE &kp SPACE &mo_tog 1 1 &kp LEFT &kp DOWN &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
         };
         
         raise_layer {
 /* ╭───────────────────────────────────╮               ╭───────────────────────────────────╮
-   |    `      ~     (    )    $    () |               |                             BKSPC |
+   |    `      ~     (    )    $    () |               | .025  .125  .25  .375  0.5  BKSPC |
    |   TAB     7     8    9    =    _  |               |  σ     µ     ε    {     }   BSLH  |
    |           4     5    6    +    -  ╰──────╮ ╭──────╯ PG_UP PG_DN       [     ]         |
    | MirrorLyr 1     2    3    *    /    C_PP | | C_PP   HOME  END    ,    .      AdjustLyr|
    ╰────────────╮    0    .  ENTER      SPACE | | SPACE         <-    v   -> ╭─────────────╯
                 ╰─────────────────────────────╯ ╰────────────────────────────╯              */
             bindings = <
-&kp GRAVE  &kp TILDE &kp LPAR &kp RPAR &kp DLLR  &mcr_paren                   &none     &none     &none       &none    &none    &kp BSPC
+&kp GRAVE  &kp TILDE &kp LPAR &kp RPAR &kp DLLR  &mcr_paren                   &mcr_025  &mcr_125  &mcr_250    &mcr_375 &mcr_500 &kp BSPC
 &trans     &kp N7    &kp N8   &kp N9   &kp EQUAL &kp UNDER                    &mcr_sig  &mcr_mu   &mcr_eps    &kp LBRC &kp RBRC &kp BSLH
 &trans     &kp N4    &kp N5   &kp N6   &kp PLUS  &kp MINUS                    &kp PG_UP &kp PG_DN &mcr_plsmns &kp LBKT &kp RBKT &none
 &mo MIRROR &kp N1    &kp N2   &kp N3   &kp STAR  &kp FSLH  &trans      &trans &kp HOME  &kp END   &trans      &trans   &none    &mo ADJUST
                      &kp N0   &kp DOT  &trans    &trans    &trans      &trans &trans    &trans    &trans      &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
+            sensor-bindings = <&inc_dec_kp HOME END &inc_dec_kp LEFT RIGHT>;
         };
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
         
         mirror_layer {
 /* ╭─────────────────────────────────╮               ╭─────────────────────────╮
@@ -440,10 +354,10 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 &trans   &kp FSLH &kp DOT &kp COMMA &kp M  &kp N  &trans   &trans &none &none  &none &none &none &none
                        &none   &none     &none  &trans &trans   &none  &none &none &none &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
+            sensor-bindings = <&inc_dec_kp HOME END &inc_dec_kp LEFT RIGHT>;
         };
         
-        adjust_layer {
+        Adjust_layer {
 /* ╭─────────────────────────────────╮          ╭─────────────────────────╮
    │ BTCLR   BT1  BT2  BT3  BT4  BT5 │          │  _   _   _   _   _   _  │
    │ ExtPwr  Hue+ Sat+ Bri+  _    _  │          │  _   _   _   _   _   _  │
@@ -457,24 +371,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 &rgb_ug RGB_TOG                 &rgb_ug RGB_HUD &rgb_ug RGB_SAD &rgb_ug RGB_BRD &rgb_ug RGB_EFF &none                      &none &none &none &none &none &none
 &none                           &none           &none           &none           &none           &none        &trans &trans &none &none &none &none &none &none
                                                 &none           &none           &none           &none        &none  &none  &none &none &none &none
-            >;
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
-        };
-
-    nav_layer {
-/* ╭─────────────────────────────────────────╮       ╭─────────────────────────╮
-   │  _   _   _      _        _        _     │       │  _   _   _   _   _   _  │
-   │  _   _   ^  slct_prv slct_word slct_nxt │       │  _   _   _   _   _   _  │
-   │  _   <-  V     ->     prv_word nxt_word ╰──╮ ╭──╯  _   _   _   _   _   _  │
-   │  _   _   _      _      HOME     END      _ | | _   _   _   _   _   _   _  │
-   ╰────────╮ _      _       _        _       _ │ │ _   _   _   _   _ ╭────────╯
-            ╰───────────────────────────────────╯ ╰───────────────────╯        */
-        bindings = <
-&none &none    &none    &none     &none      &none                   &none &none &none &none &none &none
-&none &none    &kp UP   &slct_prv &slct_word &slct_nxt               &none &none &none &none &none &none
-&none &kp LEFT &kp DOWN &kp RIGHT &prv_word  &nxt_word               &none &none &none &none &none &none
-&none &none    &none    &none     &kp HOME   &kp END   &trans &trans &none &none &none &none &none &none
-      &none    &none    &none     &none      &none     &trans &trans &none &none &none
             >;
             sensor-bindings = <&inc_dec_kp HOME END &inc_dec_kp LEFT RIGHT>;
         };

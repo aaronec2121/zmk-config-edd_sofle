@@ -145,7 +145,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             tap-ms = <10>;
             bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp I>, <&macro_release &kp LSHFT> , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4>;
         };
-        MACRO(tst, &kp BSPC)
+        MACRO(tst, &macro_tap &kp BSPC)
 };
         
   
@@ -234,7 +234,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
         default_layer {
 /* ╭─────────────────────────────────╮                 ╭──────────────────────────────────╮
    |   ESC    1    2    3    4    5  |                 |  6    7    8    9    0    BKSPC  |
-   |   TAB    Q    W    E    R    T  |                 |  Y    U    I    O    P      |    |
+   |   TAB    Q    W    E    R    T  |                 |  Y    U    I    O    P     \ |   |
    |SHFT/CAP  A    S    D    F    G  ╰───────╮ ╭───────╯  H    J    K    L    ;:    ' "   |
    |   CTRL   Z    X    C    V    B     C_PP | | C_PP     N    M    ,    .    /?  SHFT/RET|
    ╰────────────╮ WIN  ALT ENTER RAISE SPACE | | SPACE RAISE   <-   v   -> ╭──────────────╯

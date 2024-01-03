@@ -49,13 +49,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             #binding-cells = <0>;
             wait-ms = <20>;
             tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp A>
-                , <&macro_release &kp LCTRL>
-                , <&macro_tap &kp KP_N0 &kp DOT &kp KP_N0 &kp KP_N2 &kp KP_N5>
-                , <&macro_tap &kp RET>
-                ;
+            bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp A>, <&macro_release &kp LCTRL>, <&macro_tap &kp KP_N0 &kp DOT &kp KP_N0 &kp KP_N2 &kp KP_N5>, <&macro_tap &kp RET>;
         };
         mcr_125: mcr_125 {
             label = "mcr_125";

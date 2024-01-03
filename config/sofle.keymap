@@ -55,13 +55,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             #binding-cells = <0>;
             wait-ms = <20>;
             tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp A>
-                , <&macro_release &kp LCTRL>
-                , <&macro_tap &kp KP_N0 &kp DOT &kp KP_N1 &kp KP_N2 &kp KP_N5>
-                , <&macro_tap &kp RET>
-                ;
+            bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp A>, <&macro_release &kp LCTRL>, <&macro_tap &kp KP_N0 &kp DOT &kp KP_N1 &kp KP_N2 &kp KP_N5>, <&macro_tap &kp RET>;
         };
         mcr_250: mcr_250 {
             label = "mcr_250";
@@ -69,13 +63,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             #binding-cells = <0>;
             wait-ms = <20>;
             tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp A>
-                , <&macro_release &kp LCTRL>
-                , <&macro_tap &kp KP_N0 &kp DOT &kp KP_N2 &kp KP_N5>
-                , <&macro_tap &kp RET>
-                ;
+            bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp A>, <&macro_release &kp LCTRL>, <&macro_tap &kp KP_N0 &kp DOT &kp KP_N2 &kp KP_N5>, <&macro_tap &kp RET>;
         };
         mcr_375: mcr_375 {
             label = "mcr_375";
@@ -111,11 +99,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             #binding-cells = <0>;
             wait-ms = <20>;
             tap-ms = <10>;
-            bindings
-                = <&macro_press &kp LALT>
-                , <&macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8>
-                , <&macro_release &kp LALT>
-                ;
+            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8>, <&macro_release &kp LALT>;
         };
         mcr_mueps: mcr_mueps {
             label = "mcr_mueps";
@@ -213,7 +197,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
                 , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4>
                 ;
         };
-        MACRO(tst, "&kp LPAR")
+        MACRO(tst, &kp LPAR)
 };
         
   

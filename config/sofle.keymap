@@ -320,7 +320,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp UP DOWN>;
         };
-    };
 
   nav_layer {
 /* ╭─────────────────────────────────╮          ╭─────────────────────────╮

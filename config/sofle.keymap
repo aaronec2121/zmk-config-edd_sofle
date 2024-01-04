@@ -176,7 +176,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             tap-ms = <10>;
             bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp RIGHT>, <&macro_press &kp LSHFT>, <&macro_tap &kp LEFT>, <&macro_release &kp LCTRL &kp LSHFT>;
         };
-        MACRO(tst, &macro_tap &kp BSPC)
+        MACRO(tst, &macro_tap &kp BSPC,<>)
         MACRO(tst2, &macro_tap &kp W, &macro_tap &kp X)
 };
         

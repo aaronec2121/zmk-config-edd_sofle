@@ -26,14 +26,17 @@
     layers = <0 1 2>; \
   };
 
-#define MACRO(NAME, BINDINGS) \
+#define MACRO(NAME, BINDING1, BINDING2) \
   mcr_##NAME: mcr_##NAME { \
     label = EXPAND_AND_STRINGIFY(mcr_##NAME); \
     compatible = "zmk,behavior-macro"; \
     #binding-cells = <0>; \
     wait-ms = <20>; \
     tap-ms = <10>; \
-    bindings = <EXPAND_AND_STRINGIFY(##BINDINGS)>; \
+    bindings = \
+        <BINDING1>, \
+        <BINDING2>, \
+        ; \
   };
 
 ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
@@ -174,7 +177,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp RIGHT>, <&macro_press &kp LSHFT>, <&macro_tap &kp LEFT>, <&macro_release &kp LCTRL &kp LSHFT>;
         };
         MACRO(tst, &macro_tap &kp BSPC)
-        MACRO(tst2, "&macro_press &kp LALT>, <&macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N7 &kp KP_N7>, <&macro_release &kp LALT")
+        MACRO(tst2, &macro_tap &kp W, &macro_tap &kp X)
 };
         
   

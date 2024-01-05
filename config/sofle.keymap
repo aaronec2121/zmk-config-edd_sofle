@@ -14,9 +14,6 @@
 #define ADJUST 3
 #define NAV 4
 
-#define STRINGIFY(x) #x
-#define EXPAND_AND_STRINGIFY(x) STRINGIFY(x)
-
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
@@ -25,6 +22,9 @@
     key-positions = <KEYPOS>; \
     layers = <0 1 2>; \
   };
+
+#define STRINGIFY(x) #x
+#define EXPAND_AND_STRINGIFY(x) STRINGIFY(x)
 #define MACRO(NAME, BINDINGS) \
   mcr_##NAME: mcr_##NAME { \
     label = EXPAND_AND_STRINGIFY(mcr_##NAME); \
@@ -44,14 +44,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
     
 / {
     macros {
-        mcr_deg: mcr_deg {
-            label = "mcr_deg";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8 &macro_release &kp LALT>;
-        };
         mcr_mu: mcr_mu {
             label = "mcr_mu";
             compatible = "zmk,behavior-macro";
@@ -108,6 +100,9 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             tap-ms = <10>;
             bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp I>, <&macro_release &kp LSHFT> , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4>;
         };
+
+        // Symbol macros
+        MACRO(deg, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8 &macro_release &kp LALT)
 
         // Macros to move by whole words and select words
         MACRO(prv_wrd, &macro_press &kp LCTRL &macro_tap &kp LEFT &macro_release &kp LCTRL)

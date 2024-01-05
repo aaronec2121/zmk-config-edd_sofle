@@ -69,7 +69,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             #binding-cells = <0>;
             wait-ms = <20>;
             tap-ms = <10>;
-            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8>, <&macro_release &kp LALT>;
+            bindings = <&macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8 &macro_release &kp LALT>;
         };
         mcr_mu: mcr_mu {
             label = "mcr_mu";

@@ -17,6 +17,7 @@
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
+    compatible = "zmk,combos"; \
     timeout-ms = <50>; \
     bindings = <BINDINGS>; \
     key-positions = <KEYPOS>; \
@@ -44,65 +45,15 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
     
 / {
     macros {
-        mcr_mu: mcr_mu {
-            label = "mcr_mu";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N2 &kp KP_N3 &kp KP_N0>, <&macro_release &kp LALT>;
-        };
-        mcr_eps: mcr_eps {
-            label = "mcr_eps";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N2 &kp KP_N3 &kp KP_N8>, <&macro_release &kp LALT>;
-        };
-        mcr_pi: mcr_pi {
-            label = "mcr_pi";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N2 &kp KP_N2 &kp KP_N7>, <&macro_release &kp LALT>;
-        };
-        mcr_sig: mcr_sig {
-            label = "mcr_sig";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N2 &kp KP_N2 &kp KP_N9>, <&macro_release &kp LALT>;
-        };
-        mcr_plsmns: mcr_plsmns {
-            label = "mcr_plsmns";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N7 &kp KP_N7>, <&macro_release &kp LALT>;
-        };
-        mcr_paren: mcr_paren {
-            label = "mcr_paren";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_tap &kp F2 &kp LPAR &kp RPAR &kp LEFT>;
-        };
-        mcr_pw: mcr_pw {
-            label = "mcr_pw";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp I>, <&macro_release &kp LSHFT> , <&macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4>;
-        };
-
-        // Symbol macros
+        // Symbol macros and others
         MACRO(deg, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N4 &kp KP_N8 &macro_release &kp LALT)
+        MACRO(mu, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N3 &kp KP_N0 &macro_release &kp LALT)
+        MACRO(eps, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N3 &kp KP_N8 &macro_release &kp LALT)
+        MACRO(pi, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N2 &kp KP_N7 &macro_release &kp LALT)
+        MACRO(sig, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N2 &kp KP_N9 &macro_release &kp LALT)
+        MACRO(plsmns, &macro_press &kp LALT &macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N7 &kp KP_N7 &macro_release &kp LALT)
+        MACRO(int4, &macro_press &kp LSHFT &macro_tap &kp I &macro_release &kp LSHFT &macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4)
+        MACRO(paren, &macro_tap &kp F2 &kp LPAR &kp RPAR &kp LEFT)
 
         // Macros to move by whole words and select words
         MACRO(prv_wrd, &macro_press &kp LCTRL &macro_tap &kp LEFT &macro_release &kp LCTRL)
@@ -125,8 +76,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 };
 
         combos {
-            compatible = "zmk,combos";
-
 /*                        KEY POSITIONS
   ╭────────────────────────╮         ╭────────────────────────╮
   │  0   1   2   3   4   5 │         │  6   7   8   9  10  11 │
@@ -181,10 +130,10 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_del, &kp DEL, 27 28)
             COMBO(cmb_minus, &kp MINUS, 28 29)
             COMBO(cmb_up, &kp UP, 57 58)        // Up arrow by pressing left and down
-            COMBO(cmb_pw, &mcr_pw, 9 10 11)
+            COMBO(cmb_int4, &mcr_pw, 9 10 11)
         };
 };
-/ {    
+/ {
     behaviors {
         mo_tog: behavior_mo_tog {
             compatible = "zmk,behavior-hold-tap";
@@ -200,13 +149,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&kp LSHFT>, <&kp CAPS>;
-        };
-        td_Rshftcaps: td_Rshftcaps {
-            compatible = "zmk,behavior-tap-dance";
-            label = "td_Rshftcaps";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp RSHFT>, <&kp CAPS>;
         };
     };
   

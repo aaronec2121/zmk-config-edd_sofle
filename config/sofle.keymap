@@ -25,33 +25,14 @@
     key-positions = <KEYPOS>; \
     layers = <0 1 2>; \
   };
-#define MACRO3(NAME, BINDING1, BINDING2, BINDING3) \
+#define MACRO(NAME, BINDINGS) \
   mcr_##NAME: mcr_##NAME { \
     label = EXPAND_AND_STRINGIFY(mcr_##NAME); \
     compatible = "zmk,behavior-macro"; \
     #binding-cells = <0>; \
     wait-ms = <20>; \
     tap-ms = <10>; \
-    bindings = \
-        <BINDING1>, \
-        <BINDING2>, \
-        <BINDING3> \
-        ; \
-  };
-#define MACRO5(NAME, BINDING1, BINDING2, BINDING3, BINDING4, BINDING5) \
-  mcr_##NAME: mcr_##NAME { \
-    label = EXPAND_AND_STRINGIFY(mcr_##NAME); \
-    compatible = "zmk,behavior-macro"; \
-    #binding-cells = <0>; \
-    wait-ms = <20>; \
-    tap-ms = <10>; \
-    bindings = \
-        <BINDING1>, \
-        <BINDING2>, \
-        <BINDING3>, \
-        <BINDING4>, \
-        <BINDING5> \
-        ; \
+    bindings = <BINDINGS>; \
   };
 
 ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
@@ -129,23 +110,23 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
         };
 
         // Macros to move by whole words and select words
-        MACRO3(prv_wrd, &macro_press &kp LCTRL, &macro_tap &kp LEFT, &macro_release &kp LCTRL)
-        MACRO3(nxt_wrd, &macro_press &kp LCTRL, &macro_tap &kp RIGHT, &macro_release &kp LCTRL)
-        MACRO3(sel_prv, &macro_press &kp LCTRL &kp LSHFT, &macro_tap &kp LEFT, &macro_release &kp LCTRL &kp LSHFT)
-        MACRO5(sel_wrd, &macro_press &kp LCTRL, &macro_tap &kp RIGHT, &macro_press &kp LSHFT, &macro_tap &kp LEFT, &macro_release &kp LCTRL &kp LSHFT)
-        MACRO3(sel_nxt, &macro_press &kp LCTRL &kp LSHFT, &macro_tap &kp RIGHT, &macro_release &kp LCTRL &kp LSHFT)
+        MACRO(prv_wrd, &macro_press &kp LCTRL &macro_tap &kp LEFT &macro_release &kp LCTRL)
+        MACRO(nxt_wrd, &macro_press &kp LCTRL &macro_tap &kp RIGHT &macro_release &kp LCTRL)
+        MACRO(sel_prv, &macro_press &kp LCTRL &kp LSHFT &macro_tap &kp LEFT &macro_release &kp LCTRL &kp LSHFT)
+        MACRO(sel_wrd, &macro_press &kp LCTRL &macro_tap &kp RIGHT &macro_press &kp LSHFT &macro_tap &kp LEFT &macro_release &kp LCTRL &kp LSHFT)
+        MACRO(sel_nxt, &macro_press &kp LCTRL &kp LSHFT &macro_tap &kp RIGHT &macro_release &kp LCTRL &kp LSHFT)
 
         // Macros to type common decimal numbers in SolidWorks
-        MACRO5(025, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N0 &kp KP_N2 &kp KP_N5, &macro_tap &kp RET)
-        MACRO5(100, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N1, &macro_tap &kp RET)
-        MACRO5(125, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N1 &kp KP_N2 &kp KP_N5, &macro_tap &kp RET)
-        MACRO5(187, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N1 &kp KP_N8 &kp KP_N7, &macro_tap &kp RET)
-        MACRO5(250, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N2 &kp KP_N5, &macro_tap &kp RET)
-        MACRO5(375, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N3 &kp KP_N7 &kp KP_N5, &macro_tap &kp RET)
-        MACRO5(500, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N5, &macro_tap &kp RET)
-        MACRO5(625, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N6 &kp KP_N2 &kp KP_N5, &macro_tap &kp RET)
-        MACRO5(750, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N7 &kp KP_N5, &macro_tap &kp RET)
-        MACRO5(875, &macro_press &kp LCTRL, &macro_tap &kp A, &macro_release &kp LCTRL, &macro_tap &kp KP_N0 &kp DOT &kp KP_N8 &kp KP_N7 &kp KP_N5, &macro_tap &kp RET)
+        MACRO(025, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N0 &kp KP_N2 &kp KP_N5 &macro_tap &kp RET)
+        MACRO(100, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N1 &macro_tap &kp RET)
+        MACRO(125, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N1 &kp KP_N2 &kp KP_N5 &macro_tap &kp RET)
+        MACRO(187, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N1 &kp KP_N8 &kp KP_N7 &macro_tap &kp RET)
+        MACRO(250, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N2 &kp KP_N5 &macro_tap &kp RET)
+        MACRO(375, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N3 &kp KP_N7 &kp KP_N5 &macro_tap &kp RET)
+        MACRO(500, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N5 &macro_tap &kp RET)
+        MACRO(625, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N6 &kp KP_N2 &kp KP_N5 &macro_tap &kp RET)
+        MACRO(750, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N7 &kp KP_N5 &macro_tap &kp RET)
+        MACRO(875, &macro_press &kp LCTRL &macro_tap &kp A &macro_release &kp LCTRL &macro_tap &kp KP_N0 &kp DOT &kp KP_N8 &kp KP_N7 &kp KP_N5 &macro_tap &kp RET)
 };
 
         combos {

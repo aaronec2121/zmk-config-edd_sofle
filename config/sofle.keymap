@@ -17,7 +17,6 @@
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
-    compatible = "zmk,combos"; \
     timeout-ms = <50>; \
     bindings = <BINDINGS>; \
     key-positions = <KEYPOS>; \
@@ -76,6 +75,8 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 };
 
         combos {
+            compatible = "zmk,combos";
+
 /*                        KEY POSITIONS
   ╭────────────────────────╮         ╭────────────────────────╮
   │  0   1   2   3   4   5 │         │  6   7   8   9  10  11 │

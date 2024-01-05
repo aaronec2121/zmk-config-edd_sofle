@@ -130,7 +130,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_del, &kp DEL, 27 28)
             COMBO(cmb_minus, &kp MINUS, 28 29)
             COMBO(cmb_up, &kp UP, 57 58)        // Up arrow by pressing left and down
-            COMBO(cmb_int4, &mcr_pw, 9 10 11)
+            COMBO(cmb_int4, &mcr_int4, 9 10 11)
         };
 };
 / {

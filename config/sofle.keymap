@@ -14,6 +14,10 @@
 #define ADJUST 3
 #define NAV 4
 
+&sensors {
+    triggers-per-rotation = <18>;
+};
+
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \

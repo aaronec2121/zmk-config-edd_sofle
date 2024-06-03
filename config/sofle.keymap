@@ -17,7 +17,7 @@
 #define MO_TOG(layer) &mo_tog layer layer   // Macro to apply momentary-layer-on-hold/toggle-layer-on-tap to a specific layer
 #define COMBO(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
-    timeout-ms = <30>; \
+    timeout-ms = <40>; \
     bindings = <BINDINGS>; \
     key-positions = <KEYPOS>; \
     layers = <0 1 2>; \
@@ -51,7 +51,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
         MACRO(pi, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N2 &kp KP_N7 &macro_release &kp LALT)
         MACRO(sig, &macro_press &kp LALT &macro_tap &kp KP_N2 &kp KP_N2 &kp KP_N9 &macro_release &kp LALT)
         MACRO(plsmns, &macro_press &kp LALT &macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N7 &kp KP_N7 &macro_release &kp LALT)
-        MACRO(int4, &macro_press &kp LSHFT &macro_tap &kp I &macro_release &kp LSHFT &macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N4)
+        MACRO(int, &macro_press &kp LSHFT &macro_tap &kp I &macro_release &kp LSHFT &macro_tap &kp N &kp T &kp E &kp R &kp F &kp E &kp R &kp O &kp M &kp E &kp T &kp E &kp R &kp N5)
         MACRO(paren, &macro_tap &kp F2 &kp LPAR &kp RPAR &kp LEFT)
 
         // Macros to move by whole words and select words
@@ -122,16 +122,17 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 
 /*╭─────────────────────────╮  OTHER   ╭────────────────────────╮
   │ _   _    _    _   _   _ │  COMBOS  │  _   _   _   _   _   _ │
-  │ _   _{bs}_{dl}_   _   _ │          │  _   _   _   _   _   _ │
+  │ _   _{bs}_{dl}_   _{+}_ │          │  _   _   _   _   _   _ │
   │ _   _    _    _   _{-}_ ╰────╮ ╭───╯  _   _   _   _   _   _ │
   │ _   _    _    _   _   _    _ | | _    _   _   _   _   _   _ │
   ╰──────╮   _    _   _   _    _ │ │ _    _   _{^}_   _ ╭───────╯
          ╰───────────────────────╯ ╰────────────────────╯        */
             COMBO(cmb_bspc, &kp BSPC, 13 14)
             COMBO(cmb_del, &kp DEL, 14 15)
+            COMBO(cmb_plus, &kp PLUS, 16 17)
             COMBO(cmb_minus, &kp MINUS, 28 29)
             COMBO(cmb_up, &kp UP, 57 58)        // Up arrow by pressing left and down
-            COMBO(cmb_int4, &mcr_int4, 9 10 11)
+            COMBO(cmb_int, &mcr_int, 9 10 11)
         };
 };
 / {
@@ -171,22 +172,22 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 &kp LCTRL     &kp Z  &kp X    &kp C    &kp V   &kp B     &kp C_PP      &kp C_PP      &kp N     &kp M    &kp COMMA &kp DOT  &kp FSLH &mt RSHFT RET
                      &kp LGUI &kp LALT &kp RET &mo RAISE &lt NAV SPACE &lt NAV SPACE &mo RAISE &kp LEFT &kp DOWN  &kp RIGHT
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp LEFT RIGHT>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp mcr_prv_wrd mcr_nxt_wrd>;
         };
         
         raise_layer {
 /* ╭───────────────────────────────────╮               ╭───────────────────────────────────╮
    |    `      ~     (    )    $    () |               | .025  .125  .25  .375  0.5  BKSPC |
    |   TAB     7     8    9    =    _  |               |  σ     µ     ε    {     }   BSLH  |
-   |           4     5    6    +    -  ╰──────╮ ╭──────╯ PG_UP PG_DN       [     ]         |
-   | MirrorLyr 1     2    3    *    /    C_PP | | C_PP   HOME  END    ,    .      AdjustLyr|
+   |           4     5    6    *    /  ╰──────╮ ╭──────╯ PG_UP PG_DN       [     ]         |
+   | MirrorLyr 1     2    3  HOME  END   C_PP | | C_PP   HOME  END    ,    .      AdjustLyr|
    ╰────────────╮    0    .  ENTER      SPACE | | SPACE         <-    v   -> ╭─────────────╯
                 ╰─────────────────────────────╯ ╰────────────────────────────╯              */
             bindings = <
 &kp GRAVE  &kp TILDE &kp LPAR &kp RPAR &kp DLLR  &mcr_paren                   &mcr_025  &mcr_125  &mcr_250    &mcr_375 &mcr_500 &kp BSPC
 &trans     &kp N7    &kp N8   &kp N9   &kp EQUAL &kp UNDER                    &mcr_sig  &mcr_mu   &mcr_eps    &kp LBRC &kp RBRC &kp BSLH
-&trans     &kp N4    &kp N5   &kp N6   &kp PLUS  &kp MINUS                    &kp PG_UP &kp PG_DN &mcr_plsmns &kp LBKT &kp RBKT &none
-&mo MIRROR &kp N1    &kp N2   &kp N3   &kp STAR  &kp FSLH  &trans      &trans &kp HOME  &kp END   &trans      &trans   &none    &mo ADJUST
+&trans     &kp N4    &kp N5   &kp N6   &kp STAR  &kp FSLH                     &kp PG_UP &kp PG_DN &mcr_plsmns &kp LBKT &kp RBKT &none
+&mo MIRROR &kp N1    &kp N2   &kp N3   &kp HOME  &kp END   &trans      &trans &kp HOME  &kp END   &trans      &trans   &none    &mo ADJUST
                      &kp N0   &kp DOT  &trans    &trans    &trans      &trans &trans    &trans    &trans      &trans
             >;
             sensor-bindings = <&inc_dec_kp UP DOWN &inc_dec_kp LEFT RIGHT>;

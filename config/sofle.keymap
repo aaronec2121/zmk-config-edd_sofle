@@ -12,7 +12,6 @@
 #define RAISE 1
 #define MIRROR 2
 #define ADJUST 3
-#define NAV 4
 
 &sensors {
     triggers-per-rotation = <20>;
@@ -128,7 +127,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
   │ _   _{bs}_{dl}_   _{+}_ │          │  _   _   _   _   _     _ │
   │ _   _    _    _   _{-}_ ╰────╮ ╭───╯  _   _   _   _   _{RET}_ │
   │ _   _    _    _   _{±}_    _ | | _    _   _   _   _   _     _ │
-  ╰──────╮   _    _   _   _    _ │ │ _    _   _{^}_   _ ╭─────────╯
+  ╰──────╮   _{^} _   _   _    _ │ │ _    _   _{^}_   _ ╭─────────╯
          ╰───────────────────────╯ ╰────────────────────╯        */
             COMBO(cmb_bspc, &kp BSPC, 13 14)
             COMBO(cmb_del, &kp DEL, 14 15)
@@ -136,7 +135,8 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_plus, &kp PLUS, 16 17)
             COMBO(cmb_minus, &kp MINUS, 28 29)
             COMBO(cmb_plsmns, &mcr_plsmns, 40 41)
-            COMBO(cmb_up, &kp UP, 57 58)        // Up arrow by pressing left and down
+            COMBO(cmb_up1, &kp UP, 57 58)        // Up arrow by pressing left and down
+            COMBO(cmb_up2, &kp UP, 50 51)        // Up arrow by pressing left and down (for use on the mirror layer, but active on all layers)
             COMBO(cmb_int, &mcr_int, 9 10 11)
         };
 };
@@ -171,11 +171,11 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
    ╰────────────╮ WIN  ALT ENTER RAISE SPACE | | SPACE RAISE   <-   v   -> ╭──────────────╯
                 ╰────────────────────────────╯ ╰───────────────────────────╯              */
             bindings = <
-&kp ESC       &kp N1 &kp N2   &kp N3   &kp N4  &kp N5                                &kp N6    &kp N7   &kp N8    &kp N9   &kp N0   &kp BSPC
-&kp TAB       &kp Q  &kp W    &kp E    &kp R   &kp T                                 &kp Y     &kp U    &kp I     &kp O    &kp P    &kp BSLH
-&td_Lshftcaps &kp A  &kp S    &kp D    &kp F   &kp G                                 &kp H     &kp J    &kp K     &kp L    &kp SEMI &kp APOS
-&kp LCTRL     &kp Z  &kp X    &kp C    &kp V   &kp B     &kp C_PP      &kp C_PP      &kp N     &kp M    &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
-                     &kp LGUI &kp LALT &kp RET &mo RAISE &lt NAV SPACE &lt NAV SPACE &mo RAISE &kp LEFT &kp DOWN  &kp RIGHT
+&kp ESC       &kp N1 &kp N2   &kp N3   &kp N4  &kp N5                               &kp N6    &kp N7   &kp N8    &kp N9   &kp N0   &kp BSPC
+&kp TAB       &kp Q  &kp W    &kp E    &kp R   &kp T                                &kp Y     &kp U    &kp I     &kp O    &kp P    &kp BSLH
+&td_Lshftcaps &kp A  &kp S    &kp D    &kp F   &kp G                                &kp H     &kp J    &kp K     &kp L    &kp SEMI &kp APOS
+&kp LCTRL     &kp Z  &kp X    &kp C    &kp V   &kp B     &kp C_PP         &kp C_PP  &kp N     &kp M    &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
+                     &kp LGUI &kp LALT &kp RET &mo RAISE &lt MIRROR SPACE &kp SPACE &mo RAISE &kp LEFT &kp DOWN  &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp LEFT RIGHT>;
         };
@@ -199,19 +199,19 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
         };
 
         mirror_layer {
-/* ╭─────────────────────────────────╮               ╭─────────────────────────╮
-   | BKSPC   0     9    8    7    6  |               │                         │
-   |   |     P     O    I    U    Y  |               │                         │
-   |         ;:    L    K    J    H  ╰──────╮ ╭──────╯                         │
-   |         /?    .    ,    M    N    C_PP | | C_PP                           │
-   ╰────────────╮                     SPACE | |                       ╭────────╯
-                ╰───────────────────────────╯ ╰───────────────────────╯         */
+/* ╭──────────────────────────────╮               ╭─────────────────────────╮
+   |      0     9    8    7    6  |               │                         │
+   |  |   P     O    I    U    Y  |               │                         │
+   |  '"  ;:    L    K    J    H  ╰──────╮ ╭──────╯                         │
+   |      /?    .    ,    M    N    C_PP | | C_PP                           │
+   ╰─────────╮  <-   v   ->        SPACE | |                       ╭────────╯
+             ╰───────────────────────────╯ ╰───────────────────────╯         */
             bindings = <
-&kp BSPC &kp N0   &kp N9  &kp N8    &kp N7 &kp N6                 &none &none  &none &none &none &none
-&kp PIPE &kp P    &kp O   &kp I     &kp U  &kp Y                  &none &none  &none &none &none &none
-&trans   &kp SEMI &kp L   &kp K     &kp J  &kp H                  &none &none  &none &none &none &none
-&trans   &kp FSLH &kp DOT &kp COMMA &kp M  &kp N  &trans   &trans &none &none  &none &none &none &none
-                  &none   &none     &none  &trans &trans   &none  &none &none &none &none
+&trans   &kp N0   &kp N9   &kp N8    &kp N7    &kp N6                 &none &none &none &none &none &none
+&kp PIPE &kp P    &kp O    &kp I     &kp U     &kp Y                  &none &none &none &none &none &none
+&kp APOS &kp SEMI &kp L    &kp K     &kp J     &kp H                  &none &none &none &none &none &none
+&trans   &kp FSLH &kp DOT  &kp COMMA &kp M     &kp N  &trans   &trans &none &none &none &none &none &none
+                  &kp LEFT &kp DOWN  &kp RIGHT &trans &trans   &none  &none &none &none &none
             >;
             sensor-bindings = <&inc_dec_kp UP DOWN &inc_dec_kp LEFT RIGHT>;
         };
@@ -221,8 +221,8 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
    │ BTCLR   BT1  BT2  BT3  BT4  BT5 │          │  _   _   _   _   _   _  │
    │ ExtPwr  Hue+ Sat+ Bri+  _    _  │          │  _   _   _   _   _   _  │
    │ TogRGB  Hue- Sat- Bri- Eff   _  ╰────╮ ╭───╯  _   _   _   _   _   _  │
-   │   _      _    _    _    _    _     _ | | _    _   _   _   _   _   _  │
-   ╰────────╮ _    _    _    _    _     _ │ │ _    _   _   _   _ ╭────────╯
+   │   _      _    _    _    _    _  C_PP | | C_PP _   _   _   _   _   _  │
+   ╰────────╮ _    _    _    _    _    _  │ │  _   _   _   _   _ ╭────────╯
             ╰─────────────────────────────╯ ╰────────────────────╯        */
         bindings = <
 &bt BT_CLR                      &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4               &none &none &none &none &none &none
@@ -230,24 +230,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 &rgb_ug RGB_TOG                 &rgb_ug RGB_HUD &rgb_ug RGB_SAD &rgb_ug RGB_BRD &rgb_ug RGB_EFF &none                      &none &none &none &none &none &none
 &none                           &none           &none           &none           &none           &none        &trans &trans &none &none &none &none &none &none
                                                 &none           &none           &none           &none        &none  &none  &none &none &none &none
-            >;
-            sensor-bindings = <&inc_dec_kp UP DOWN &inc_dec_kp LEFT RIGHT>;
-        };
-
-  nav_layer {
-/* ╭───────────────────────────────────────╮         ╭─────────────────────────╮
-   │   _    _    _    _       _       _    │         │  _   _   _   _   _   _  │
-   │   _    _    ^ sel_prv sel_wrd sel_nxt │         │  _   _   _   _   _   _  │
-   │   _    <    v    >    prv_wrd nxt_wrd ╰───╮ ╭───╯  _   _   _   _   _   _  │
-   │   _    _    _    _       _       _      _ | | _    _   _   _   _   _   _  │
-   ╰──────╮ _    _    _       _       _      _ │ │ _    _   _   _   _ ╭────────╯
-          ╰────────────────────────────────────╯ ╰────────────────────╯        */
-        bindings = <
-&none &none    &none    &none        &none        &none                      &none &none &none &none &none &none
-&none &none    &kp UP   &mcr_sel_prv &mcr_sel_wrd &mcr_sel_nxt               &none &none &none &none &none &none
-&none &kp LEFT &kp DOWN &kp RIGHT    &mcr_prv_wrd &mcr_nxt_wrd               &none &none &none &none &none &none
-&none &none    &none    &none        &none        &none        &trans &trans &none &none &none &none &none &none
-               &none    &none        &none        &none        &trans &trans &none &none &none &none
             >;
             sensor-bindings = <&inc_dec_kp UP DOWN &inc_dec_kp LEFT RIGHT>;
         };

@@ -93,7 +93,7 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 /*╭─────────────────────────╮   COMBOS   ╭────────────────────────╮
   │ _   _    _    _   _   _ │    with    │  _   _   _   _   _   _ │
   │ _   _    _    _   _   _ │ RAISE (53) │  _   _   _   _   _   _ │
-  │ _   _    _    _   _{±}_ ╰────╮   ╭───╯  _   _   _   _   _   _ │
+  │ _   _    _    _   _   _ ╰────╮   ╭───╯  _   _   _   _   _   _ │
   │ _   π    °    σ   µ   ε    _ |   | _    _   _   _   _   _   _ │
   ╰───────╮ PSCRN _   _  RAISE _ │   │ _    _   _   _   _ ╭───────╯
           ╰──────────────────────╯   ╰────────────────────╯        */
@@ -103,7 +103,6 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_sig, &mcr_sig, 39 53)
             COMBO(cmb_mu, &mcr_mu, 40 53)
             COMBO(cmb_eps, &mcr_eps, 41 53)
-            COMBO(cmb_plsmns, &mcr_plsmns, 28 29 53)
             COMBO(cmb_pscrn, &kp PSCRN, 50 53)
 
 /*╭─────────────────────────────╮   COMBOS   ╭────────────────────────╮
@@ -124,17 +123,19 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
             COMBO(cmb_750, &mcr_750, 16 54)
             COMBO(cmb_875, &mcr_875, 17 54)
 
-/*╭─────────────────────────╮  OTHER   ╭────────────────────────╮
-  │ _   _    _    _   _   _ │  COMBOS  │  _   _   _   _   _   _ │
-  │ _   _{bs}_{dl}_   _{+}_ │          │  _   _   _   _   _   _ │
-  │ _   _    _    _   _{-}_ ╰────╮ ╭───╯  _   _   _   _   _   _ │
-  │ _   _    _    _   _   _    _ | | _    _   _   _   _   _   _ │
-  ╰──────╮   _    _   _   _    _ │ │ _    _   _{^}_   _ ╭───────╯
+/*╭─────────────────────────╮  OTHER   ╭──────────────────────────╮
+  │ _   _    _    _   _   _ │  COMBOS  │  _   _   _   _   _     _ │
+  │ _   _{bs}_{dl}_   _{+}_ │          │  _   _   _   _   _     _ │
+  │ _   _    _    _   _{-}_ ╰────╮ ╭───╯  _   _   _   _   _{RET}_ │
+  │ _   _    _    _   _{±}_    _ | | _    _   _   _   _   _     _ │
+  ╰──────╮   _    _   _   _    _ │ │ _    _   _{^}_   _ ╭─────────╯
          ╰───────────────────────╯ ╰────────────────────╯        */
             COMBO(cmb_bspc, &kp BSPC, 13 14)
             COMBO(cmb_del, &kp DEL, 14 15)
+            COMBO(cmb_enter, &kp RET, 34 35)
             COMBO(cmb_plus, &kp PLUS, 16 17)
             COMBO(cmb_minus, &kp MINUS, 28 29)
+            COMBO(cmb_plsmns, &mcr_plsmns, 40 41)
             COMBO(cmb_up, &kp UP, 57 58)        // Up arrow by pressing left and down
             COMBO(cmb_int, &mcr_int, 9 10 11)
         };
@@ -165,15 +166,15 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
 /* ╭─────────────────────────────────╮                 ╭──────────────────────────────────╮
    |   ESC    1    2    3    4    5  |                 |  6    7    8    9    0    BKSPC  |
    |   TAB    Q    W    E    R    T  |                 |  Y    U    I    O    P     \ |   |
-   |SHFT/CAP  A    S    D    F    G  ╰───────╮ ╭───────╯  H    J    K    L    ;:  SHFT/'" |
-   |   CTRL   Z    X    C    V    B     C_PP | | C_PP     N    M    ,    .    /?   ENTER  |
+   | SHFT/CAP A    S    D    F    G  ╰───────╮ ╭───────╯  H    J    K    L    ;:    '"    |
+   |   CTRL   Z    X    C    V    B     C_PP | | C_PP     N    M    ,    .    /?   SHIFT  |
    ╰────────────╮ WIN  ALT ENTER RAISE SPACE | | SPACE RAISE   <-   v   -> ╭──────────────╯
                 ╰────────────────────────────╯ ╰───────────────────────────╯              */
             bindings = <
 &kp ESC       &kp N1 &kp N2   &kp N3   &kp N4  &kp N5                                &kp N6    &kp N7   &kp N8    &kp N9   &kp N0   &kp BSPC
 &kp TAB       &kp Q  &kp W    &kp E    &kp R   &kp T                                 &kp Y     &kp U    &kp I     &kp O    &kp P    &kp BSLH
-&td_Lshftcaps &kp A  &kp S    &kp D    &kp F   &kp G                                 &kp H     &kp J    &kp K     &kp L    &kp SEMI &mt RSHFT APOS
-&kp LCTRL     &kp Z  &kp X    &kp C    &kp V   &kp B     &kp C_PP      &kp C_PP      &kp N     &kp M    &kp COMMA &kp DOT  &kp FSLH &kp RET
+&td_Lshftcaps &kp A  &kp S    &kp D    &kp F   &kp G                                 &kp H     &kp J    &kp K     &kp L    &kp SEMI &kp APOS
+&kp LCTRL     &kp Z  &kp X    &kp C    &kp V   &kp B     &kp C_PP      &kp C_PP      &kp N     &kp M    &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
                      &kp LGUI &kp LALT &kp RET &mo RAISE &lt NAV SPACE &lt NAV SPACE &mo RAISE &kp LEFT &kp DOWN  &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp LEFT RIGHT>;
@@ -238,14 +239,14 @@ ZMK_UNICODE_SINGLE(ucd_delta,  N0, N3, N9, N4)
    │   _    _    _    _       _       _    │         │  _   _   _   _   _   _  │
    │   _    _    ^ sel_prv sel_wrd sel_nxt │         │  _   _   _   _   _   _  │
    │   _    <    v    >    prv_wrd nxt_wrd ╰───╮ ╭───╯  _   _   _   _   _   _  │
-   │   _    _    _    _     HOME     END     _ | | _    _   _   _   _   _   _  │
+   │   _    _    _    _       _       _      _ | | _    _   _   _   _   _   _  │
    ╰──────╮ _    _    _       _       _      _ │ │ _    _   _   _   _ ╭────────╯
           ╰────────────────────────────────────╯ ╰────────────────────╯        */
         bindings = <
 &none &none    &none    &none        &none        &none                      &none &none &none &none &none &none
 &none &none    &kp UP   &mcr_sel_prv &mcr_sel_wrd &mcr_sel_nxt               &none &none &none &none &none &none
 &none &kp LEFT &kp DOWN &kp RIGHT    &mcr_prv_wrd &mcr_nxt_wrd               &none &none &none &none &none &none
-&none &none    &none    &none        &kp HOME     &kp END      &trans &trans &none &none &none &none &none &none
+&none &none    &none    &none        &none        &none        &trans &trans &none &none &none &none &none &none
                &none    &none        &none        &none        &trans &trans &none &none &none &none
             >;
             sensor-bindings = <&inc_dec_kp UP DOWN &inc_dec_kp LEFT RIGHT>;
